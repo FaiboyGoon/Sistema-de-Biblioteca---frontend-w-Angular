@@ -1,0 +1,107 @@
+<div
+  class="bg-image"
+  style="
+    background-image: url('https://images.unsplash.com/photo-1588580000645-4562a6d2c839?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    height: 100vh;
+  "
+>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="centre">Reservas Cadastradas</h3>
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group mb-3">
+                  <input
+                    (keyup)="findByDataReservaAfter()"
+                    [(ngModel)]="pesquisa"
+                    type="text"
+                    class="form-control"
+                    placeholder="Procurar Data Reserva: yyyy-MM-dd"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="direita">
+                  <a
+                    (click)="new()"
+                    class="btn btn-success btn-rounded"
+                    mdbRippled
+                  >
+                    <i class="fas fa-plus fa-sm"></i> Add Reserva
+                  </a>
+                </div>
+              </div>
+            </div>
+            <table border="1" class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Data da Reserva</th>
+                  <th scope="col">Usuário</th>
+                  <th scope="col">Livro</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (reserva of lista; track $index) {
+                <tr>
+                  <td>{{ reserva.id }}</td>
+                  <td>{{ reserva.dataReserva }}</td>
+                  <td>{{ reserva.usuario.nome }}</td>
+                  <td>{{ reserva.livro.titulo }}</td>
+
+                  <td class="direita">
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-rounded"
+                      mdbRipple
+                      (click)="edit(reserva)"
+                    >
+                      <i class="fas fa-pencil fa-sm"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-rounded"
+                      mdbRipple
+                      (click)="deleteById(reserva)"
+                    >
+                      <i class="fas fa-trash fa-sm"></i>
+                    </button>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalReservaForm>
+  <div class="modal-header">
+    @if (reservaEdit.id > 0) {
+    <h5 class="modal-title" id="exampleModalLabel">Editando Reserva</h5>
+    }@else {
+    <h5 class="modal-title" id="exampleModalLabel">Cadastrando nova reserva</h5>
+    }
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-reservas-form
+      [reserva]="reservaEdit"
+      (meuEvento)="meuEventoTratamento($event)"
+    ></app-reservas-form>
+  </div>
+</ng-template>

@@ -1,0 +1,98 @@
+<div
+  class="bg-image"
+  style="
+    background-image: url('https://images.unsplash.com/photo-1588580000645-4562a6d2c839?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    height: 100vh;
+  "
+>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="centre">Usuários Cadastrados</h3>
+            <br />
+
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group mb-3">
+                  <input
+                    (keyup)="findByNome()"
+                    [(ngModel)]="pesquisa"
+                    type="text"
+                    class="form-control"
+                    placeholder="Procurar Autor:"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="direita">
+                  <a
+                    href="dashboard/usuarios/new"
+                    class="btn btn-success btn-rounded"
+                    mdbRippled
+                  >
+                    <i class="fas fa-plus fa-sm"></i> Add Usuário
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">EMAIL</th>
+                  <th scope="col">NOME</th>
+                  <th scope="col">ROLE</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (usuario of lista; track $index) {
+                <tr>
+                  <td>{{ usuario.id }}</td>
+                  <td>{{ usuario.email }}</td>
+                  @if (!modoModal) {
+                  <td>{{ usuario.nome }}</td>
+                  <td>{{ usuario.role }}</td>
+                  <td class="direita">
+                    <a
+                      href="dashboard/usuarios/edit/{{ usuario.id }}"
+                      class="btn btn-primary btn-rounded"
+                      mdbRippled
+                    >
+                      <i class="fas fa-pencil fa-sm"></i>
+                    </a>
+                    <button
+                      (click)="deleteById(usuario)"
+                      class="btn btn-danger btn-rounded"
+                      mdbRippled
+                    >
+                      <i class="fas fa-trash fa-sm"></i>
+                    </button>
+                  </td>
+                  }@else {
+                  <td class="direita">
+                    <button
+                      (click)="selecionar(usuario)"
+                      class="btn btn-success btn-rounded"
+                      mdbRippled
+                    >
+                      Selecionar
+                    </button>
+                  </td>
+                  }
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

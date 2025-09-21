@@ -1,0 +1,130 @@
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-12 azul">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="centre">Gêneros Disponíveis</h3>
+          <br />
+
+          <div class="row">
+            <div class="col-6">
+              <div class="input-group mb-3">
+                <input
+                  (keyup)="findByNome()"
+                  [(ngModel)]="pesquisa"
+                  type="text"
+                  class="form-control"
+                  placeholder="Procurar Gênero:"
+                  aria-label="Recipient's username"
+                  aria-describedby="button-addon2"
+                />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="direita">
+                @if(!modoModal){
+
+                <a
+                  (click)="new()"
+                  class="btn btn-success btn-rounded"
+                  mdbRippled
+                >
+                  <i class="fas fa-plus fa-sm"></i> Add Genero
+                </a>
+                }
+              </div>
+            </div>
+          </div>
+
+          <ngb-pagination
+            (pageChange)="trocarPagina($event)"
+            [pageSize]="pagina.size"
+            [collectionSize]="pagina.totalElements"
+            [(page)]="numPage"
+            [boundaryLinks]="true"
+          />
+
+          <select
+            (change)="findAll()"
+            class="form-control"
+            [(ngModel)]="qtidPorPagina"
+            name="adkfj"
+            id=""
+          >
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="1000">1000</option>
+          </select>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NOME</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (genero of lista; track $index) {
+              <tr>
+                <td>{{ genero.id }}</td>
+                <td>{{ genero.nome }}</td>
+                <td class="direita">
+                  @if(!modoModal){
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-rounded"
+                    mdbRipple
+                    (click)="edit(genero)"
+                  >
+                    <i class="fas fa-pencil fa-sm"></i>
+                  </button>
+                  <button
+                    (click)="deleteById(genero)"
+                    class="btn btn-danger btn-rounded"
+                    mdbRippled
+                  >
+                    <i class="fas fa-trash fa-sm"></i>
+                  </button>
+                  }@else {
+                  <button
+                    (click)="selecionar(genero)"
+                    class="btn btn-success btn-rounded"
+                    mdbRippled
+                  >
+                    Selecionar
+                  </button>
+                  }
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalGeneroForm>
+  <div class="modal-header">
+    @if (generoEdit.id > 0) {
+    <h5 class="modal-title" id="exampleModalLabel">Editando gênero</h5>
+    }@else {
+    <h5 class="modal-title" id="exampleModalLabel">Cadastrando novo gênero</h5>
+    }
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-generos-form
+      [genero]="generoEdit"
+      (meuEvento)="meuEventoTratamento($event)"
+    ></app-generos-form>
+  </div>
+</ng-template>

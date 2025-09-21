@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body centre">
+          <form #formulario="ngForm" (ngSubmit)="save()">
+            <div class="row">
+              <div class="col-12">
+                <mdb-form-control>
+                  <input
+                    required
+                    [(ngModel)]="reserva.dataReserva"
+                    mdbInput
+                    type="text"
+                    name="titulo"
+                    class="form-control"
+                  />
+                  <label mdbLabel class="form-label" for="nome"
+                    >Data da Reserva: yyyy-MM-dd</label
+                  >
+                </mdb-form-control>
+              </div>
+
+              <div class="col-12">
+                <br />
+                <div class="input-group mb-3">
+                  @if(reserva.usuario){
+                  <div class="border w-100 p-2 text-primary">
+                    {{ reserva.usuario.nome }}
+                  </div>
+                  <button
+                    (click)="buscarUsuario()"
+                    class="btn btn-secondary"
+                    type="button"
+                    mdbRipple
+                    rippleColor="danger"
+                  >
+                    Trocar Usuário
+                  </button>
+                  }@else{
+                  <div class="border w-100 p-2">
+                    Nenhum usuário selecionado!
+                  </div>
+                  <button
+                    (click)="buscarUsuario()"
+                    class="btn btn-secondary"
+                    type="button"
+                    mdbRipple
+                    rippleColor="danger"
+                  >
+                    Buscar Usuário
+                  </button>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <br />
+              <div class="input-group mb-3">
+                @if(reserva.livro){
+                <div class="border w-100 p-2 text-primary">
+                  {{ reserva.livro.titulo }}
+                </div>
+                <button
+                  (click)="buscarLivro()"
+                  class="btn btn-secondary"
+                  type="button"
+                  mdbRipple
+                  rippleColor="danger"
+                >
+                  Trocar Livro
+                </button>
+                }@else{
+                <div class="border w-100 p-2">Nenhum livro selecionado!</div>
+                <button
+                  (click)="buscarLivro()"
+                  class="btn btn-secondary"
+                  type="button"
+                  mdbRipple
+                  rippleColor="danger"
+                >
+                  Buscar Livro
+                </button>
+                }
+              </div>
+            </div>
+            @if(reserva.id > 0){
+            <button
+              type="submit"
+              [disabled]="!formulario.valid"
+              class="btn btn-success btn-rounded"
+            >
+              <i class="fas fa-save fa-sm"></i> Atualizar
+            </button>
+            }@else {
+            <button
+              type="submit"
+              [disabled]="!formulario.valid"
+              class="btn btn-success btn-rounded"
+            >
+              <i class="fas fa-save fa-sm"></i> Salvar
+            </button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalUsuariosList>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Listagem de Usuários</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-usuarios-list
+      [modoModal]="true"
+      (meuEvento)="meuEventoTratamento($event)"
+    ></app-usuarios-list>
+  </div>
+</ng-template>
+
+<ng-template #modalLivrosList>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Listagem de Livros</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-livros-list
+      [modoModal]="true"
+      (meuEvento)="meuEventoTratamentoLivro($event)"
+    ></app-livros-list>
+  </div>
+</ng-template>

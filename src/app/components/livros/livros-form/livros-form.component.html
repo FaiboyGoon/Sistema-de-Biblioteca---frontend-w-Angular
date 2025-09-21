@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body centre">
+          <form #formulario="ngForm" (ngSubmit)="save()">
+            <div class="row">
+              <div class="col-12">
+                <mdb-form-control>
+                  <input
+                    required
+                    [(ngModel)]="livro.titulo"
+                    mdbInput
+                    type="text"
+                    name="titulo"
+                    class="form-control"
+                  />
+                  <label mdbLabel class="form-label" for="nome"
+                    >Titulo do Livro:</label
+                  >
+                </mdb-form-control>
+              </div>
+
+              <div class="col-12">
+                <br />
+                <div class="input-group mb-3">
+                  @if(livro.autor){
+                  <div class="border w-100 p-2 text-primary">
+                    {{ livro.autor.nome }}
+                  </div>
+                  <button
+                    (click)="buscarAutor()"
+                    class="btn btn-secondary"
+                    type="button"
+                    mdbRipple
+                    rippleColor="danger"
+                  >
+                    Trocar Autor
+                  </button>
+                  }@else{
+                  <div class="border w-100 p-2">Nenhum autor selecionado!</div>
+                  <button
+                    (click)="buscarAutor()"
+                    class="btn btn-secondary"
+                    type="button"
+                    mdbRipple
+                    rippleColor="danger"
+                  >
+                    Buscar Autor
+                  </button>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6 esquerda">
+                <h5>Gêneros:</h5>
+              </div>
+              <div class="col-6 direita">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-rounded"
+                  (click)="buscarGeneros()"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <table class="border table table-striped">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @for (genero of livro.generos; track $index) {
+                <tr>
+                  <td>{{ genero.nome }}</td>
+                  <td>
+                    <button
+                      class="btn btn-danger btn-rounded"
+                      type="button"
+                      (click)="deletarGenero(genero)"
+                    >
+                      <i class="fas fa-trash fa-xs"></i>
+                    </button>
+                  </td>
+                </tr>
+                }@empty {
+                <div class="esquerda">
+                  <br /><br />
+                  <h5>Nenhum Gênero vinculado.</h5>
+                  <br /><br />
+                </div>
+                }
+              </tbody>
+            </table>
+
+            @if(livro.id > 0){
+            <button
+              type="submit"
+              [disabled]="!formulario.valid"
+              class="btn btn-success btn-rounded"
+            >
+              <i class="fas fa-save fa-sm"></i> Atualizar
+            </button>
+            }@else {
+            <button
+              type="submit"
+              [disabled]="!formulario.valid"
+              class="btn btn-success btn-rounded"
+            >
+              <i class="fas fa-save fa-sm"></i> Salvar
+            </button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalAutoresList>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Listagem de Autores</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-autores-list
+      [modoModal]="true"
+      (meuEvento)="meuEventoTratamento($event)"
+    ></app-autores-list>
+  </div>
+</ng-template>
+
+<ng-template #modalGenerosList>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Listagem de Gêneros</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-generos-list
+      [modoModal]="true"
+      (meuEvento)="meuEventoTratamentoGenero($event)"
+    ></app-generos-list>
+  </div>
+</ng-template>

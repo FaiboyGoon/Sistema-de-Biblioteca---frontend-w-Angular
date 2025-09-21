@@ -1,0 +1,120 @@
+<div
+  class="bg-image"
+  style="
+    background-image: url('https://images.unsplash.com/photo-1588580000645-4562a6d2c839?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    height: 100vh;
+  "
+>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            @if(!modoModal){
+            <h3 class="centre">Autores Disponíveis</h3>
+            <br />
+            }
+
+            <div class="row">
+              <div class="col-6">
+                <div class="input-group mb-3">
+                  <input
+                    (keyup)="findByNome()"
+                    [(ngModel)]="pesquisa"
+                    type="text"
+                    class="form-control"
+                    placeholder="Procurar Autor:"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                </div>
+              </div>
+
+              @if(!modoModal){
+              <div class="col-6">
+                <div class="direita">
+                  <a
+                    (click)="new()"
+                    class="btn btn-success btn-rounded"
+                    mdbRippled
+                  >
+                    <i class="fas fa-plus fa-sm"></i> Add Autor
+                  </a>
+                </div>
+              </div>
+              }
+            </div>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">NOME</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (autor of lista; track $index) {
+                <tr>
+                  <td>{{ autor.id }}</td>
+                  <td>{{ autor.nome }}</td>
+                  <td class="direita">
+                    @if(!modoModal){
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-rounded"
+                      mdbRipple
+                      (click)="edit(autor)"
+                    >
+                      <i class="fas fa-pencil fa-sm"></i>
+                    </button>
+                    <button
+                      (click)="deleteById(autor)"
+                      class="btn btn-danger btn-rounded"
+                      mdbRippled
+                    >
+                      <i class="fas fa-trash fa-sm"></i>
+                    </button>
+                    }@else{
+                    <button
+                      (click)="selecionar(autor)"
+                      class="btn btn-success btn-rounded"
+                      mdbRippled
+                    >
+                      Selecionar
+                    </button>
+                    }
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalAutorForm>
+  <div class="modal-header">
+    @if (autorEdit.id > 0) {
+    <h5 class="modal-title" id="exampleModalLabel">Editando livro</h5>
+    }@else {
+    <h5 class="modal-title" id="exampleModalLabel">Cadastrando novo livro</h5>
+    }
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modalRef.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <app-autores-form
+      [autor]="autorEdit"
+      (meuEvento)="meuEventoTratamento($event)"
+    ></app-autores-form>
+  </div>
+</ng-template>

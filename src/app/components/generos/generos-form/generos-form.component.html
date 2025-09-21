@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body centre">
+          <h3>Cadastro de Gêneros</h3>
+          <br />
+
+          <form #formulario="ngForm" (ngSubmit)="save()">
+            <mdb-form-control>
+              <input
+                mdbInput
+                type="text"
+                name="nome"
+                class="form-control"
+                [(ngModel)]="genero.nome"
+              />
+              <label mdbLabel class="form-label" for="nome"
+                >Nome do Gênero:</label
+              >
+            </mdb-form-control>
+            <br />
+
+            @if(genero.id > 0){
+            <button
+              type="submit"
+              [disabled]="!formulario.valid"
+              class="btn btn-success btn-rounded"
+            >
+              <i class="fas fa-save fa-sm"></i> Atualizar
+            </button>
+            }@else {
+            <button
+              type="submit"
+              [disabled]="!formulario.valid"
+              class="btn btn-success btn-rounded"
+            >
+              <i class="fas fa-save fa-sm"></i> Salvar
+            </button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

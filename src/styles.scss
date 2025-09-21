@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@fortawesome/fontawesome-free/css/all.css";
+@import "mdb-angular-ui-kit/assets/scss/mdb.scss";
+
+.centre {
+  text-align: center;
+}
+
+.direita {
+  text-align: right;
+}
+
+.esquerda {
+  text-align: left;
+}
+
+.card {
+  background-color: lightgrey;
+}
+
+body {
+  background-color: (#c8c8c8);
+}
+
+.modal-body {
+  background-color: #f5f5f5;
+}
+
+.modal-header {
+  background-color: #dddddd;
+}
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";

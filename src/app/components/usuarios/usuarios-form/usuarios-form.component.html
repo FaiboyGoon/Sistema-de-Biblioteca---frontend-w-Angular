@@ -1,0 +1,95 @@
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body centre">
+          <h3>Cadastro de usuario</h3>
+          <br />
+
+          <form #formulario="ngForm" (ngSubmit)="save()">
+            <mdb-form-control>
+              <input
+                mdbInput
+                required
+                type="text"
+                name="nome-usuario"
+                class="form-control"
+                [(ngModel)]="usuario.nome"
+              />
+              <label mdbLabel class="form-label" for="nome-usuario"
+                >Nome Completo:</label
+              >
+            </mdb-form-control>
+
+            <br />
+            <mdb-form-control>
+              <input
+                mdbInput
+                required
+                type="email"
+                name="email"
+                class="form-control"
+                [(ngModel)]="usuario.email"
+              />
+              <label mdbLabel class="form-label" for="email"
+                >Email do Usuário:</label
+              >
+              <small class="text-danger" *ngIf="backendErrors['email']">{{ backendErrors['email'] }}</small>
+            </mdb-form-control>
+
+            <br />
+            @if (!modoEdit) {
+            <mdb-form-control>
+              <input
+                mdbInput
+                required
+                type="password"
+                name="password"
+                class="form-control"
+                [(ngModel)]="password"
+              />
+              <label mdbLabel class="form-label" for="password">Senha:</label>
+            </mdb-form-control>
+
+            <br />
+            } @if(usuario.id > 0){
+            <button
+              type="submit"
+              [disabled]="!formulario.valid"
+              class="btn btn-success btn-rounded"
+            >
+              <i class="fas fa-save fa-sm"></i> Atualizar
+            </button>
+            }@else {
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+                <div>
+                  <button
+                    type="submit"
+                    [disabled]="!formulario.valid"
+                    class="btn btn-success btn-rounded"
+                  >
+                    <i class="fas fa-save fa-sm"></i> Salvar
+                  </button>
+                </div>
+              </div>
+
+                <div class="col">
+                  <!-- Simple link -->
+                  <a class="btn btn-primary btn-rounded" href="/">
+                    <i class="fa-solid fa-rotate-left"></i> Voltar ao Login
+                  </a>
+                </div>
+              </div>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4"></div>
+  </div>
+</div>

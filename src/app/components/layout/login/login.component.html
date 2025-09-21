@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4"></div>
+
+      <div class="col-lg-4">
+        <div class="card centre">
+          <div class="card-body">
+            <h2 class="card-title">Login</h2>
+            <form>
+              <!-- Email input -->
+              <mdb-form-control class="mb-4">
+                <input
+                  mdbInput
+                  type="email"
+                  id="form2Example1"
+                  class="form-control"
+                  [(ngModel)]="login.username"
+                  name="username"
+                />
+                <label mdbLabel class="form-label" for="form2Example1"
+                  >Email do Usuário</label
+                >
+              </mdb-form-control>
+
+              <!-- Password input -->
+              <mdb-form-control class="mb-4">
+                <input
+                  mdbInput
+                  type="password"
+                  id="form2Example2"
+                  class="form-control"
+                  [(ngModel)]="login.password"
+                  name="password"
+                  (keyup.enter)="logar()"
+                />
+                <label mdbLabel class="form-label" for="form2Example2"
+                  >Senha</label
+                >
+              </mdb-form-control>
+
+              <!-- Submit button -->
+              <button
+                mdbRipple
+                type="button"
+                class="btn btn-primary btn-block mb-4"
+                (click)="logar()"
+              >
+                Entrar
+              </button>
+
+              <!-- Register buttons -->
+              <div class="text-center">
+                <p>Ainda não está registado? <a [routerLink]="['/registar']">Registar-se</a></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>
