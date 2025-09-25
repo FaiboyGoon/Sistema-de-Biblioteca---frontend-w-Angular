@@ -22,7 +22,7 @@
                     [(ngModel)]="pesquisa"
                     type="text"
                     class="form-control"
-                    placeholder="Procurar Autor:"
+                    placeholder="Procurar Usuário:"
                     aria-label="Recipient's username"
                     aria-describedby="button-addon2"
                   />
@@ -46,9 +46,11 @@
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">EMAIL</th>
+                  @if (!modoModal) {
                   <th scope="col">NOME</th>
                   <th scope="col">ROLE</th>
                   <th scope="col"></th>
+                  }
                 </tr>
               </thead>
               <tbody>

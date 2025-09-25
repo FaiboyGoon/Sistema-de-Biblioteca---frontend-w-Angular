@@ -66,8 +66,12 @@ export class GenerosFormComponent {
         error: (err: ApiErrorResponse) => {
           if (err.errors) {
             this.backendErrors = err.errors;
+            this.roteador.navigate(['dashboard/generos']);
+            this.meuEvento.emit('OK');
           } else {
             Swal.fire('Erro', err.message, 'error');
+            this.roteador.navigate(['dashboard/generos']);
+            this.meuEvento.emit('OK');
           }
         },
       });
@@ -85,8 +89,12 @@ export class GenerosFormComponent {
         error: (err: ApiErrorResponse) => {
           if (err.errors) {
             this.backendErrors = err.errors;
+            this.roteador.navigate(['dashboard/generos']);
+            this.meuEvento.emit('OK');
           } else {
             Swal.fire('Erro', err.message, 'error');
+            this.roteador.navigate(['dashboard/generos']);
+            this.meuEvento.emit('OK');
           }
         },
       });

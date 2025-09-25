@@ -37,7 +37,7 @@ export class UsuarioService {
   }
 
   deleteById(id: number): Observable<string>{
-    return this.http.delete<string>(this.API+'deleteById'+id, {responseType: 'text' as 'json'});
+    return this.http.delete<string>(this.API+'/deleteById/'+id, {responseType: 'text' as 'json'});
   }
 
   save(usuario: Usuario): Observable<string>{
