@@ -37,7 +37,9 @@
               <label mdbLabel class="form-label" for="email"
                 >Email do Usuário:</label
               >
-              <small class="text-danger" *ngIf="backendErrors['email']">{{ backendErrors['email'] }}</small>
+              <small class="text-danger" *ngIf="backendErrors['email']">{{
+                backendErrors["email"]
+              }}</small>
             </mdb-form-control>
 
             <br />
@@ -77,13 +79,12 @@
                 </div>
               </div>
 
-                <div class="col">
-                  <!-- Simple link -->
-                  <a class="btn btn-primary btn-rounded" href="/">
-                    <i class="fa-solid fa-rotate-left"></i> Voltar ao Login
-                  </a>
-                </div>
+              <div class="col">
+                <a class="btn btn-primary btn-rounded" href="/">
+                  <i class="fa-solid fa-rotate-left"></i> Voltar ao Login
+                </a>
               </div>
+            </div>
             }
           </form>
         </div>
