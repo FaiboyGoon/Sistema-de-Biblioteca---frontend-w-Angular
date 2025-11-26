@@ -19,6 +19,10 @@ import { CommonModule } from '@angular/common';
 export class UsuariosFormComponent {
   modoEdit: boolean = false;
 
+  get isPagRegisto(): boolean {
+    return this.router.url.includes('new');
+  }
+
   usuario: Usuario = new Usuario();
   password: string = '';
 
@@ -29,7 +33,7 @@ export class UsuariosFormComponent {
   usuarioService = inject(UsuarioService);
   loginService = inject(LoginService);
 
-  constructor() {
+  constructor(private router: Router) {
     let id = this.rotaAtivida.snapshot.params['id'];
     if (id) {
       this.findById(id);
