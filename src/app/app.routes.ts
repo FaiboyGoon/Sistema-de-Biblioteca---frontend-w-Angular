@@ -12,12 +12,13 @@ import { GenerosFormComponent } from './components/generos/generos-form/generos-
 import { ReservasListComponent } from './components/reservas/reservas-list/reservas-list.component';
 import { ReservasFormComponent } from './components/reservas/reservas-form/reservas-form.component';
 import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuarios-list.component';
+import { loginGuard } from './auth/login.guard';
 
 export const routes: Routes = [
     {path: "", redirectTo: "login", pathMatch: 'full'},
     {path: "login", component: LoginComponent},
     {path: "registar", component: UsuariosFormComponent},
-    {path: "dashboard", component: DashboardComponent, children:[
+    {path: "dashboard", component: DashboardComponent, canActivate: [loginGuard], children:[
         {path: "principal", component: PrincipalComponent},
         {path: "livros", component: LivrosListComponent},
         {path: "livros/new", component: LivrosFormComponent},
