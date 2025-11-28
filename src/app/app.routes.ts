@@ -15,25 +15,30 @@ import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuar
 import { loginGuard } from './auth/login.guard';
 
 export const routes: Routes = [
-    {path: "", redirectTo: "login", pathMatch: 'full'},
-    {path: "login", component: LoginComponent},
-    {path: "registar", component: UsuariosFormComponent},
-    {path: "dashboard", component: DashboardComponent, canActivate: [loginGuard], children:[
-        {path: "principal", component: PrincipalComponent},
-        {path: "livros", component: LivrosListComponent},
-        {path: "livros/new", component: LivrosFormComponent},
-        {path: "livros/edit/:id", component: LivrosFormComponent},
-        {path: "autores", component: AutoresListComponent},
-        {path: "autores/new", component: AutoresFormComponent},
-        {path: "autores/edit/:id", component: AutoresFormComponent},
-        {path: "generos", component: GenerosListComponent},
-        {path: "generos/new", component: GenerosFormComponent},
-        {path: "generos/edit/:id", component: GenerosFormComponent},
-        {path: "reservas", component: ReservasListComponent},
-        {path: "reservas/new", component: ReservasFormComponent},
-        {path: "reservas/edit/:id", component: ReservasFormComponent},
-        {path: "usuarios", component: UsuariosListComponent},
-        {path: "usuarios/new", component: UsuariosFormComponent},
-        {path: "usuarios/edit/:id", component: UsuariosFormComponent}
-    ]}
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'registar', component: UsuariosFormComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [loginGuard],
+    children: [
+      { path: 'principal', component: PrincipalComponent },
+      { path: 'livros', component: LivrosListComponent },
+      { path: 'livros/new', component: LivrosFormComponent },
+      { path: 'livros/edit/:id', component: LivrosFormComponent },
+      { path: 'autores', component: AutoresListComponent },
+      { path: 'autores/new', component: AutoresFormComponent },
+      { path: 'autores/edit/:id', component: AutoresFormComponent },
+      { path: 'generos', component: GenerosListComponent },
+      { path: 'generos/new', component: GenerosFormComponent },
+      { path: 'generos/edit/:id', component: GenerosFormComponent },
+      { path: 'reservas', component: ReservasListComponent },
+      { path: 'reservas/new', component: ReservasFormComponent },
+      { path: 'reservas/edit/:id', component: ReservasFormComponent },
+      { path: 'usuarios', component: UsuariosListComponent },
+      { path: 'usuarios/new', component: UsuariosFormComponent },
+      { path: 'usuarios/edit/:id', component: UsuariosFormComponent },
+    ],
+  },
 ];

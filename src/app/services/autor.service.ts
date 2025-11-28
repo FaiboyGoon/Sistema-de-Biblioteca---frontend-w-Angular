@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Autor } from '../models/autor';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AutorService {
   http = inject(HttpClient);
 
-  API = 'http://localhost:8080/api/autores';
+  API = environment.API_URL+'/api/autores';
 
   constructor() {}
 

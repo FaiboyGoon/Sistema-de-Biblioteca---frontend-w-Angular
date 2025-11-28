@@ -3,6 +3,7 @@ import { Genero } from '../models/genero';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Page } from '../models/page';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { Page } from '../models/page';
 export class GeneroService {
   http = inject(HttpClient);
 
-  API = 'http://localhost:8080/api/generos';
+  API = environment.API_URL+'/api/generos';
 
   constructor() {}
 
